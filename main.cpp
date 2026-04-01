@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <cstdlib>
 #include "Goat.h"
 using namespace std;
 
@@ -33,3 +34,18 @@ int main() {
     return 0;
 }
 
+int main_menu() {
+    int choice;
+    string buf;
+
+    cout << "*** GOAT MANAGER 3001 ***" << endl;
+    cout << "[1] Add a goat" << endl;
+    cout << "[2] Delete a goat" << endl;
+    cout << "[3] List goats" << endl;
+    cout << "[4] Quit" << endl;
+    
+    cin >> bnf; choice = atoi(buf.c_str());
+    cin.ignore(1000, 10);
+
+
+}

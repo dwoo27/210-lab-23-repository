@@ -44,8 +44,15 @@ int main_menu() {
     cout << "[3] List goats" << endl;
     cout << "[4] Quit" << endl;
     
-    cin >> bnf; choice = atoi(buf.c_str());
+    cin >> buf; choice = atoi(buf.c_str());
     cin.ignore(1000, 10);
 
+    while (choice < 1 || choice > 4) {
+        cout << "Invalid choice. Try again." << endl;
+        cin >> buf; choice = atoi(buf.c_str());
+        cin.ignore(1000, 10);
+    }
+
+    return choice;
 
 }

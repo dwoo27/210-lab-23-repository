@@ -56,3 +56,13 @@ int main_menu() {
     return choice;
 
 }
+
+void delete_goat(list<Goat>& trip);
+void add_goat(list<Goat>& trip, string[] n, string[] c) {
+    string name = n[rand() % SZ_NAMES];
+    string color = c[rand() % SZ_COLORS];
+    int age = rand() % (MAX_AGE + 1);
+    Goat g(name, age, color);
+
+}
+void display_trip(list<Goat> trip);

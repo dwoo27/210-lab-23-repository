@@ -59,6 +59,7 @@ int main_menu() {
 
 int select_goat(list<Goat> trip) {
     if (tripempty()) {
+        cout << "No gats to select." << endl;
         return -1;
     }
 
@@ -87,7 +88,27 @@ int select_goat(list<Goat> trip) {
     return choice;
     
 }
-void delete_goat(list<Goat>& trip);
+void delete_goat(list<Goat>& trip) {
+    if (tripempty()) {
+        cout << "No goats to delete." << endl;
+        return;
+    }
+
+    int choice = select_goat(trip);
+
+    auto it = trip.begin(); 
+    for (int i = 1; i < choice; i++) { //must use i in for loop to compare to choice, cannot compare it pointer and int choice
+        it++;                          //also must use because unable to access specific indexes for std::lists
+    }
+
+    cout << "Deleted goat: "
+        << it->get_name() << "("
+        << it->get_age() << ", "
+        << it->get_color() << ")" endl;
+
+    trip.erase(it);
+
+}
 
 
 void add_goat(list<Goat>& trip, string[] n, string[] c) {
@@ -103,4 +124,22 @@ void add_goat(list<Goat>& trip, string[] n, string[] c) {
         << g.get_age() << ", "
         << g.get_color() << ")" endl;
 }
-void display_trip(list<Goat> trip);
+
+void display_trip(list<Goat> trip) {
+    if (tripempty()) {
+        cout << "No goats" << endl;
+        return;
+    }
+
+    int count = 1;
+
+    cout << "Current Trip: " << endl;
+
+    for (auto it = trip.begin(); it != trip.end(); it++) {
+        cout << "[" << count << "] "
+            << it->get_name() << "("
+            << it->get_age() << ", "
+            << it->get_color() << ")" endl;
+        count++;
+     }
+}

@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <list>
 #include <cstdlib>
+#include <ctime>
 #include "Goat.h"
 using namespace std;
 
@@ -16,7 +17,7 @@ int main_menu();
 
 int main() {
     srand(time(0));
-    bool again;
+    bool again = true;
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
@@ -32,11 +33,11 @@ int main() {
 
     list<Goat> trip;
 
-    while (true) {
+    while (again) {
         int choice = main_menu();
 
         if (choice == 1) {
-            add_goat(trip);
+            add_goat(trip, names, colors);
         }
         else if (choice == 2) {
             delete_goat(trip);
@@ -45,7 +46,7 @@ int main() {
             display_trip(trip);
         }
         else if (choice == 4) {
-            false; 
+            again = false; 
         }
     }
 
@@ -76,17 +77,17 @@ int main_menu() {
 }
 
 int select_goat(list<Goat> trip) {
-    if (tripempty()) {
-        cout << "No gats to select." << endl;
+    if (trip.empty()) {
+        cout << "No goats to select." << endl;
         return -1;
     }
 
-    count = 1
+    int count = 1;
     for (auto it = trip.begin(); it != trip.end(); it++) {
         cout << "[" << count << "] "
             << it->get_name() << "("
             << it->get_age() << ", "
-            << it->get_color() << ")" endl;
+            << it->get_color() << ")" << endl;
         count++;
     }
 
@@ -97,7 +98,7 @@ int select_goat(list<Goat> trip) {
     cin >> buf; choice = atoi(buf.c_str());
     cin.ignore(1000, 10);
 
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice >= count) {
         cout << "Invalid choice. Try again." << endl;
         cin >> buf; choice = atoi(buf.c_str());
         cin.ignore(1000, 10);
@@ -107,7 +108,7 @@ int select_goat(list<Goat> trip) {
     
 }
 void delete_goat(list<Goat>& trip) {
-    if (tripempty()) {
+    if (trip.empty()) {
         cout << "No goats to delete." << endl;
         return;
     }
@@ -122,7 +123,7 @@ void delete_goat(list<Goat>& trip) {
     cout << "Deleted goat: "
         << it->get_name() << "("
         << it->get_age() << ", "
-        << it->get_color() << ")" endl;
+        << it->get_color() << ")" << endl;
 
     trip.erase(it);
 
@@ -136,15 +137,16 @@ void add_goat(list<Goat>& trip, string[] n, string[] c) {
     Goat g(name, age, color);
 
     trip.push_back(g);
+    trip.sort();
     
     cout << "Added goat: " << endl
         << g.get_name() << "(" 
         << g.get_age() << ", "
-        << g.get_color() << ")" endl;
+        << g.get_color() << ")" << endl;
 }
 
 void display_trip(list<Goat> trip) {
-    if (tripempty()) {
+    if (trip.empty()) {
         cout << "No goats" << endl;
         return;
     }
@@ -155,9 +157,9 @@ void display_trip(list<Goat> trip) {
 
     for (auto it = trip.begin(); it != trip.end(); it++) {
         cout << "[" << count << "] "
-            << it->get_name() << "("
+            << it->get_name() << " ("
             << it->get_age() << ", "
-            << it->get_color() << ")" endl;
+            << it->get_color() << ")" << endl;
         count++;
      }
 }

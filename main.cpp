@@ -33,7 +33,7 @@ int main() {
     list<Goat> trip;
 
     while (true) {
-        int choice = main_meni();
+        int choice = main_menu();
 
         if (choice == 1) {
             add_goat(trip);

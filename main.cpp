@@ -81,8 +81,11 @@ int select_goat(list<Goat> trip) {
         cout << "No goats to select." << endl;
         return -1;
     }
-
+    
     int count = 1;
+
+    cout << endl;
+
     for (auto it = trip.begin(); it != trip.end(); it++) {
         cout << "[" << count << "] "
             << it->get_name() << "("
@@ -91,12 +94,16 @@ int select_goat(list<Goat> trip) {
         count++;
     }
 
+    cout << endl; 
+
     int choice;
     string buf;
 
     cout << "Choice: ";
     cin >> buf; choice = atoi(buf.c_str());
     cin.ignore(1000, 10);
+
+    cout << endl;
 
     while (choice < 1 || choice >= count) {
         cout << "Invalid choice. Try again." << endl;
@@ -120,12 +127,16 @@ void delete_goat(list<Goat>& trip) {
         it++;                          //also must use because unable to access specific indexes for std::lists
     }
 
+    cout << endl;
+
     cout << "Deleted goat: "
         << it->get_name() << "("
         << it->get_age() << ", "
         << it->get_color() << ")" << endl;
 
     trip.erase(it);
+
+    cout << endl;
 
 }
 
@@ -138,12 +149,17 @@ void add_goat(list<Goat>& trip, string n[], string c[]) {
 
     trip.push_back(g);
     trip.sort();
+
+    cout << endl;
     
     cout << "Added goat: " << endl
         << g.get_name() << "(" 
         << g.get_age() << ", "
         << g.get_color() << ")" << endl;
+
+    cout << endl;
 }
+
 
 void display_trip(list<Goat> trip) {
     if (trip.empty()) {
@@ -152,6 +168,8 @@ void display_trip(list<Goat> trip) {
     }
 
     int count = 1;
+   
+    cout << endl;
 
     cout << "Current Trip: " << endl;
 
@@ -162,4 +180,6 @@ void display_trip(list<Goat> trip) {
             << it->get_color() << ")" << endl;
         count++;
      }
+
+    cout << endl;
 }
